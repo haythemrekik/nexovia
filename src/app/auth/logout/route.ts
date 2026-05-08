@@ -25,10 +25,11 @@ export async function POST(request: NextRequest) {
 
   await supabase.auth.signOut()
 
-  const url = request.nextUrl.clone()
-  url.pathname = '/login'
+  const host = request.headers.get('host') || 'localhost:3000'
+  const protocol = request.headers.get('x-forwarded-proto') || (host.includes('localhost') ? 'http' : 'https')
+  const redirectUrl = `${protocol}://${host}/login`
 
-  return NextResponse.redirect(url, {
+  return NextResponse.redirect(redirectUrl, {
     status: 302,
   })
 }
