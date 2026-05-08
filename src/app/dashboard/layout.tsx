@@ -1,7 +1,8 @@
 'use client'
+import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { LayoutDashboard, Users, MessageCircle, HelpCircle, Settings, TrendingUp, Building2, ChevronLeft, Bell, LogOut } from 'lucide-react'
+import { LayoutDashboard, Users, MessageCircle, HelpCircle, Settings, TrendingUp, Building2, ChevronLeft, Bell, LogOut, Menu, X } from 'lucide-react'
 import { useBusinesses } from '@/lib/use-data'
 
 const adminNav = [
@@ -25,22 +26,34 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const currentClientId = clientMatch ? clientMatch[1] : null
   const currentClient = currentClientId ? businesses.find(b => b.id === currentClientId) : null
   const navItems = currentClientId ? clientNav(currentClientId) : adminNav
+  const [sidebarOpen, setSidebarOpen] = useState(false)
+
+  const closeSidebar = () => setSidebarOpen(false)
 
   return (
     <div style={{ display: 'flex', minHeight: '100vh' }}>
+      {/* Mobile hamburger */}
+      <button className="mobile-menu-btn" onClick={() => setSidebarOpen(true)} aria-label="Ouvrir le menu">
+        <Menu size={22} />
+      </button>
+
+      {/* Overlay mobile */}
+      {sidebarOpen && <div className="sidebar-overlay" onClick={closeSidebar} />}
+
       {/* SIDEBAR */}
-      <aside className="sidebar">
-        <div className="sidebar-logo">
+      <aside className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
+        <div className="sidebar-logo" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <Link href="/" style={{ textDecoration: 'none' }}>
             <div style={{ fontFamily: 'var(--font-display)', fontSize: 20, fontWeight: 700, color: 'var(--color-gold)' }}>NEXOVIA</div>
             <div style={{ fontSize: 11, color: 'var(--color-text-subtle)', marginTop: 2, letterSpacing: '0.06em', textTransform: 'uppercase' }}>Dashboard</div>
           </Link>
+          <button className="mobile-close-btn" onClick={closeSidebar} aria-label="Fermer le menu"><X size={20} /></button>
         </div>
 
         <nav className="sidebar-nav">
           {currentClientId && (
             <>
-              <Link href="/dashboard/clients" className="sidebar-item" style={{ marginBottom: 8 }}>
+              <Link href="/dashboard/clients" className="sidebar-item" style={{ marginBottom: 8 }} onClick={closeSidebar}>
                 <ChevronLeft size={16} /> Tous les clients
               </Link>
               <div style={{ padding: '12px 14px', marginBottom: 4 }}>
@@ -59,7 +72,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           {navItems.map((item) => {
             const isActive = pathname === item.href || (item.href !== '/dashboard' && pathname.startsWith(item.href))
             return (
-              <Link key={item.href} href={item.href} className={`sidebar-item ${isActive ? 'active' : ''}`}>
+              <Link key={item.href} href={item.href} className={`sidebar-item ${isActive ? 'active' : ''}`} onClick={closeSidebar}>
                 <item.icon size={18} />
                 {item.label}
               </Link>
@@ -70,7 +83,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             <>
               <div className="sidebar-section-label" style={{ marginTop: 8 }}>Accès rapide</div>
               {businesses.slice(0, 3).map((b) => (
-                <Link key={b.id} href={`/dashboard/client/${b.id}`} className="sidebar-item">
+                <Link key={b.id} href={`/dashboard/client/${b.id}`} className="sidebar-item" onClick={closeSidebar}>
                   <div style={{ width: 24, height: 24, borderRadius: 6, background: 'var(--color-surface-3)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, fontWeight: 700, color: 'var(--color-gold)', flexShrink: 0 }}>
                     {b.name.charAt(0)}
                   </div>
@@ -85,12 +98,12 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         </nav>
 
         <div style={{ padding: '16px 12px', borderTop: '1px solid var(--color-border)', display: 'flex', flexDirection: 'column', gap: 2 }}>
-          <button className="sidebar-item">
+          <button className="sidebar-item" onClick={() => alert("Les notifications seront disponibles prochainement.")}>
             <Bell size={18} />
             Notifications
             <span style={{ marginLeft: 'auto', background: 'var(--color-gold)', color: '#0a0a12', fontSize: 10, fontWeight: 700, padding: '2px 6px', borderRadius: 99 }}>3</span>
           </button>
-          <Link href="/" className="sidebar-item">
+          <Link href="/" className="sidebar-item" onClick={closeSidebar}>
             <LogOut size={18} />
             Retour au site
           </Link>

@@ -54,7 +54,7 @@ export default function ClientDashboard({ params }: { params: Promise<{ id: stri
 
       <div className="page-content">
         {/* KPI Cards */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16, marginBottom: 32 }}>
+        <div className="responsive-grid-4" style={{ marginBottom: 32 }}>
           {[
             { label: 'Leads total', value: leads.length, sub: `${leads.filter(l => l.lead_status === 'new').length} nouveaux`, icon: Users, color: 'var(--color-info)' },
             { label: 'Taux conversion', value: `${conversionRate}%`, sub: `${convertedLeads} convertis`, icon: TrendingUp, color: 'var(--color-success)' },
@@ -74,7 +74,7 @@ export default function ClientDashboard({ params }: { params: Promise<{ id: stri
           ))}
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
+        <div className="responsive-grid-2">
           {/* Recent Leads */}
           <div>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>

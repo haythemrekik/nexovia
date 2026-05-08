@@ -21,7 +21,7 @@ export default function ConversationsPage({ params }: { params: Promise<{ id: st
         <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 28, fontWeight: 700 }}>Conversations</h1>
       </div>
       <div className="page-content">
-        <div style={{ display: 'grid', gridTemplateColumns: '320px 1fr', gap: 0, border: '1px solid var(--color-border)', borderRadius: 'var(--radius-lg)', overflow: 'hidden', height: 'calc(100vh - 200px)', minHeight: 500 }}>
+        <div className="chat-layout" style={{ gap: 0, border: '1px solid var(--color-border)', borderRadius: 'var(--radius-lg)', overflow: 'hidden', height: 'calc(100vh - 200px)', minHeight: 500 }}>
           {/* Thread list */}
           <div style={{ background: 'var(--color-surface)', borderRight: '1px solid var(--color-border)', overflowY: 'auto' }}>
             <div style={{ padding: '16px', borderBottom: '1px solid var(--color-border)' }}>
@@ -90,8 +90,8 @@ export default function ConversationsPage({ params }: { params: Promise<{ id: st
                   ))}
                 </div>
                 <div style={{ padding: '16px 20px', borderTop: '1px solid var(--color-border)', background: 'var(--color-surface)', display: 'flex', gap: 12, alignItems: 'center' }}>
-                  <input className="input" placeholder="Répondre manuellement..." disabled style={{ flex: 1, opacity: 0.5 }} />
-                  <button className="btn btn-gold btn-sm" disabled style={{ opacity: 0.5 }}><Send size={14} /></button>
+                  <input className="input" placeholder="Répondre manuellement..." style={{ flex: 1 }} />
+                  <button className="btn btn-gold btn-sm" onClick={() => alert("L'envoi de messages manuels sera activé avec l'API Meta/WhatsApp.")}><Send size={14} /></button>
                 </div>
               </>
             ) : (

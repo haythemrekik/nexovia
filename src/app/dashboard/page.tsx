@@ -36,7 +36,7 @@ export default function AdminDashboard() {
 
       <div className="page-content">
         {/* KPI Cards */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16, marginBottom: 32, opacity: loading ? 0.6 : 1, transition: 'opacity 0.3s' }}>
+        <div className="responsive-grid-4" style={{ marginBottom: 32, opacity: loading ? 0.6 : 1, transition: 'opacity 0.3s' }}>
           {[
             { label: 'MRR Total', value: `${totalMRR.toLocaleString()} DT`, sub: '+12% ce mois', icon: TrendingUp, color: 'var(--color-gold)' },
             { label: 'Clients actifs', value: activeClients, sub: `${businesses.length} total`, icon: Building2, color: 'var(--color-info)' },

@@ -110,7 +110,7 @@ export default function LandingPage() {
         </div>
 
         {/* Stats */}
-        <div style={{ maxWidth: 900, margin: '80px auto 0', padding: '0 32px', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 1, background: 'var(--color-border)' }}>
+        <div className="responsive-grid-4" style={{ maxWidth: 900, margin: '80px auto 0', padding: '0 32px', gap: 1, background: 'var(--color-border)' }}>
           {stats.map((s, i) => (
             <div key={i} style={{ background: 'var(--color-surface)', padding: '32px 24px', textAlign: 'center' }}>
               <div style={{ fontFamily: 'var(--font-display)', fontSize: 36, fontWeight: 700, color: 'var(--color-gold)', marginBottom: 8 }}>{s.value}</div>
@@ -130,7 +130,7 @@ export default function LandingPage() {
             Un système qui travaille<br />pendant que vous soignez
           </h2>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
+        <div className="responsive-grid-3">
           {results.map((r, i) => (
             <div key={i} className="card" style={{ display: 'flex', gap: 20, alignItems: 'flex-start' }}>
               <div style={{ width: 44, height: 44, borderRadius: 12, background: 'rgba(201,169,110,0.1)', border: '1px solid rgba(201,169,110,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
@@ -154,7 +154,7 @@ export default function LandingPage() {
           </h2>
           <p style={{ color: 'var(--color-text-muted)', marginTop: 16 }}>Setup unique + abonnement mensuel. Sans engagement après 3 mois.</p>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24, alignItems: 'start' }}>
+        <div className="responsive-grid-3" style={{ alignItems: 'start' }}>
           {offers.map((o, i) => (
             <div key={i} className={`pricing-card${o.featured ? ' featured' : ''}`}>
               {o.featured && (
@@ -236,7 +236,7 @@ export default function LandingPage() {
 
       {/* FOOTER */}
       <footer style={{ borderTop: '1px solid var(--color-border)', padding: '40px 32px' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16 }}>
           <div style={{ fontFamily: 'var(--font-display)', fontSize: 20, fontWeight: 700, color: 'var(--color-gold)' }}>NEXOVIA</div>
           <div style={{ fontSize: 13, color: 'var(--color-text-subtle)' }}>© 2024 NEXOVIA. Automatisation IA pour l&apos;esthétique premium.</div>
           <div style={{ fontSize: 13, color: 'var(--color-text-subtle)' }}>contact@nexovia.tn</div>

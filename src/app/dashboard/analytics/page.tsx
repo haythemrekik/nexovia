@@ -33,7 +33,7 @@ export default function AnalyticsPage() {
         <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 28, fontWeight: 700 }}>Analytics</h1>
       </div>
       <div className="page-content">
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 16, marginBottom: 32 }}>
+        <div className="responsive-grid-5" style={{ gap: 16, marginBottom: 32 }}>
           {[
             { label: 'MRR', value: `${totalMRR.toLocaleString()} DT`, change: '+12%', up: true, icon: DollarSign, color: 'var(--color-gold)' },
             { label: 'Clients', value: businesses.length, change: '+1', up: true, icon: Building2, color: 'var(--color-info)' },
@@ -53,7 +53,7 @@ export default function AnalyticsPage() {
             </div>
           ))}
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 24 }}>
+        <div className="responsive-grid-2-1">
           <div className="card">
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 24 }}>
               <h2 style={{ fontSize: 16, fontWeight: 600 }}>Évolution MRR</h2>
