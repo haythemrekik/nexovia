@@ -31,9 +31,9 @@ export default function ClientsPage() {
       } else {
         alert('Mode démo : la création sera disponible une fois Supabase configuré.')
       }
-    } catch (err) {
+    } catch (err: any) {
       console.error(err)
-      alert('Erreur lors de la création.')
+      alert('Erreur lors de la création: ' + (err?.message || 'Erreur inconnue'))
     } finally {
       setSaving(false)
       closeModal()
