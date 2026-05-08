@@ -49,8 +49,18 @@ function LoginContent() {
       setLoading(false)
       return
     }
-
-    router.push(redirect)
+    // Après login réussi : synchroniser le profil et rediriger
+    try {
+      const res = await fetch('/api/sync-profile', { method: 'POST' })
+      if (res.ok) {
+        const data = await res.json()
+        router.push(data.redirect || redirect)
+      } else {
+        router.push(redirect)
+      }
+    } catch {
+      router.push(redirect)
+    }
     router.refresh()
   }
 

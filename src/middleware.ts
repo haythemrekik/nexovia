@@ -42,6 +42,21 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(url)
   }
 
+  // Client users accessing /dashboard root → redirect to their business
+  if (user && request.nextUrl.pathname === '/dashboard') {
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('role, business_id')
+      .eq('id', user.id)
+      .single()
+
+    if (profile?.role === 'client' && profile?.business_id) {
+      const url = request.nextUrl.clone()
+      url.pathname = `/dashboard/client/${profile.business_id}`
+      return NextResponse.redirect(url)
+    }
+  }
+
   return supabaseResponse
 }
 
