@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { LayoutDashboard, Users, MessageCircle, HelpCircle, Settings, TrendingUp, Building2, ChevronLeft, Bell, LogOut, Menu, X } from 'lucide-react'
 import { useBusinesses } from '@/lib/use-data'
+import { signOutAction } from '@/app/actions'
 
 const adminNav = [
   { href: '/dashboard', icon: LayoutDashboard, label: 'Vue globale' },
@@ -107,7 +108,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             <LogOut size={18} />
             Retour au site
           </Link>
-          <form action="/auth/logout" method="POST">
+          <form action={signOutAction}>
             <button type="submit" className="sidebar-item" style={{ color: 'var(--color-error)' }}>
               <LogOut size={18} />
               Déconnexion
